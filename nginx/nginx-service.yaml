@@ -8,5 +8,5 @@ spec:
   type: LoadBalancer
   ports:
     - port: 443
-    selector:
-      app: my-nginx
+  selector:
+    app: my-nginx
