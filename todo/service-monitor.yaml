@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: todo
+  # labels:
+  #   team: frontend
+spec:
+  selector:
+    matchLabels:
+      app: todo
+  endpoints:
+    - path: /metrics
+      port: web
+  namespaceSelector:
+    matchNames:
+      - todo
