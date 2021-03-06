@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
+  name: todo
 spec:
   selector:
     matchLabels:
-      app: my-nginx
+      app: todo
   replicas: 2
   template:
     metadata:
       labels:
-        app: my-nginx
+        app: todo
     spec:
       containers:
-        - name: my-nginx
-          image: nginx:alpine
+        - name: todo
+          image: jackcaldwell/go-todo:latest
           resources:
             requests:
               cpu: 100m
@@ -23,4 +23,4 @@ spec:
               cpu: 100m
               memory: 100Mi
           ports:
-            - containerPort: 80
+            - containerPort: 8080
