@@ -2,5 +2,5 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: git@github.com:jackcaldwell/argocd-demo.git
+    repoURL: https://github.com/jackcaldwell/argocd-demo.git
     targetRevision: master
