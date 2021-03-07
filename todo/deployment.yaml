@@ -23,4 +23,5 @@ spec:
               cpu: 100m
               memory: 100Mi
           ports:
-            - containerPort: 8080
+          - name: web
+            containerPort: 8080
