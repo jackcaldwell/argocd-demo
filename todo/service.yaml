@@ -8,5 +8,6 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8080
+      name: web
   selector:
     app: todo
