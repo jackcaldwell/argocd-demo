@@ -2,18 +2,15 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: todo
-  namespace: {{ template "kube-prometheus-stack.namespace" . }}
+  namespace: prometheus
   labels:
     app: todo
-  # labels:
-  #   team: frontend
 spec:
   selector:
     matchLabels:
       app: todo
   endpoints:
-    - path: /metrics
-      port: web
+    - port: web
   namespaceSelector:
     matchNames:
       - todo
