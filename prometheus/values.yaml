@@ -4,19 +4,19 @@
 
 ## Provide a name in place of kube-prometheus-stack for `app:` labels
 ##
-nameOverride: ""
+nameOverride: ''
 
 ## Override the deployment namespace
 ##
-namespaceOverride: ""
+namespaceOverride: ''
 
 ## Provide a k8s version to auto dashboard import script example: kubeTargetVersionOverride: 1.16.6
 ##
-kubeTargetVersionOverride: ""
+kubeTargetVersionOverride: ''
 
 ## Provide a name to substitute for the full names of resources
 ##
-fullnameOverride: ""
+fullnameOverride: ''
 
 ## Labels to apply to all resources
 ##
@@ -57,7 +57,7 @@ defaultRules:
   ## Runbook url prefix for default rules
   runbookUrl: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#
   ## Reduce app namespace alert scope
-  appNamespacesTarget: ".*"
+  appNamespacesTarget: '.*'
 
   ## Labels for default rules
   labels: {}
@@ -126,7 +126,7 @@ alertmanager:
   ##
   serviceAccount:
     create: true
-    name: ""
+    name: ''
     annotations: {}
 
   ## Configure pod disruption budgets for Alertmanager
@@ -137,7 +137,7 @@ alertmanager:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: ''
 
   ## Alertmanager configuration directives
   ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file
@@ -147,19 +147,19 @@ alertmanager:
     global:
       resolve_timeout: 5m
     route:
-      group_by: ["job"]
+      group_by: ['job']
       group_wait: 30s
       group_interval: 5m
       repeat_interval: 12h
-      receiver: "null"
+      receiver: 'null'
       routes:
         - match:
             alertname: Watchdog
-          receiver: "null"
+          receiver: 'null'
     receivers:
-      - name: "null"
+      - name: 'null'
     templates:
-      - "/etc/alertmanager/config/*.tmpl"
+      - '/etc/alertmanager/config/*.tmpl'
 
   ## Pass the Alertmanager configuration directives through Helm's templating
   ## engine. If the Alertmanager configuration contains Alertmanager templates,
@@ -256,9 +256,9 @@ alertmanager:
     ##
     ## Prefix for the per replica ingress that will have `-$replicaNumber`
     ## appended to the end
-    hostPrefix: ""
+    hostPrefix: ''
     ## Domain that will be used for the per replica ingress
-    hostDomain: ""
+    hostDomain: ''
 
     ## Paths to use for ingress rules
     ##
@@ -271,7 +271,7 @@ alertmanager:
 
     ## Secret name containing the TLS certificate for alertmanager per replica ingress
     ## Secret must be manually created in the namespace
-    tlsSecretName: ""
+    tlsSecretName: ''
 
     ## Separated secret for each per replica Ingress. Can be used together with cert-manager
     ##
@@ -280,14 +280,14 @@ alertmanager:
       ## Final form of the secret for each per replica ingress is
       ## {{ tlsSecretPerReplica.prefix }}-{{ $replicaNumber }}
       ##
-      prefix: "alertmanager"
+      prefix: 'alertmanager'
 
   ## Configuration for Alertmanager service
   ##
   service:
     annotations: {}
     labels: {}
-    clusterIP: ""
+    clusterIP: ''
 
     ## Port for Alertmanager Service to listen on
     ##
@@ -307,7 +307,7 @@ alertmanager:
     additionalPorts: []
 
     externalIPs: []
-    loadBalancerIP: ""
+    loadBalancerIP: ''
     loadBalancerSourceRanges: []
     ## Service type
     ##
@@ -343,11 +343,11 @@ alertmanager:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     selfMonitor: true
 
     ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
-    scheme: ""
+    scheme: ''
 
     ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
     ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
@@ -386,7 +386,7 @@ alertmanager:
     image:
       repository: quay.io/prometheus/alertmanager
       tag: v0.21.0
-      sha: ""
+      sha: ''
 
     ## If true then the user will be responsible to provide a secret with alertmanager configuration
     ## So when true the config part will be ignored (including templateFiles) and the one in the secret will be used
@@ -504,7 +504,7 @@ alertmanager:
     ## The value "hard" means that the scheduler is *required* to not schedule two replica pods onto the same node.
     ## The value "" will disable pod anti-affinity so that no anti-affinity rules will be configured.
     ##
-    podAntiAffinity: ""
+    podAntiAffinity: ''
 
     ## If anti-affinity is enabled sets the topologyKey to use for anti-affinity.
     ## This can be changed to, for example, failure-domain.beta.kubernetes.io/zone
@@ -576,7 +576,7 @@ alertmanager:
 
     ## Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: ''
 
     ## AdditionalPeers allows injecting a set of additional Alertmanagers to peer with to form a highly available cluster.
     ##
@@ -584,7 +584,7 @@ alertmanager:
 
     ## PortName to use for Alert Manager.
     ##
-    portName: "web"
+    portName: 'web'
 
     ## ClusterAdvertiseAddress is the explicit address to advertise in cluster. Needs to be provided for non RFC1918 [1] (public) addresses. [1] RFC1918: https://tools.ietf.org/html/rfc1918
     ##
@@ -598,7 +598,7 @@ alertmanager:
 ##
 grafana:
   enabled: true
-  namespaceOverride: ""
+  namespaceOverride: ''
 
   ## Deploy default dashboards.
   ##
@@ -699,12 +699,12 @@ grafana:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     selfMonitor: true
 
     # Path to use for scraping metrics. Might be different if server.root_url is set
     # in grafana.ini
-    path: "/metrics"
+    path: '/metrics'
 
     ## 	metric relabel configs to apply to samples before ingestion.
     ##
@@ -746,7 +746,7 @@ kubeApiServer:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     jobLabel: component
     selector:
       matchLabels:
@@ -769,7 +769,7 @@ kubelet:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## Enable scraping the kubelet over https. For requirements to enable this see
     ## https://github.com/prometheus-operator/prometheus-operator/issues/926
@@ -789,7 +789,7 @@ kubelet:
     ##
     resource: false
     # From kubernetes 1.18, /metrics/resource/v1alpha1 renamed to /metrics/resource
-    resourcePath: "/metrics/resource/v1alpha1"
+    resourcePath: '/metrics/resource/v1alpha1'
     ## Metric relabellings to apply to samples before ingestion
     ##
     cAdvisorMetricRelabelings: []
@@ -899,7 +899,7 @@ kubeControllerManager:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## Enable scraping kube-controller-manager over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
@@ -941,7 +941,7 @@ coreDns:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## 	metric relabel configs to apply to samples before ingestion.
     ##
@@ -976,7 +976,7 @@ kubeDns:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## 	metric relabel configs to apply to samples before ingestion.
     ##
@@ -1043,13 +1043,13 @@ kubeEtcd:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     scheme: http
     insecureSkipVerify: false
-    serverName: ""
-    caFile: ""
-    certFile: ""
-    keyFile: ""
+    serverName: ''
+    caFile: ''
+    certFile: ''
+    keyFile: ''
 
     ## 	metric relabel configs to apply to samples before ingestion.
     ##
@@ -1091,7 +1091,7 @@ kubeScheduler:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     ## Enable scraping kube-scheduler over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
@@ -1141,7 +1141,7 @@ kubeProxy:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## Enable scraping kube-proxy over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
@@ -1169,7 +1169,7 @@ kubeStateMetrics:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     ## Override serviceMonitor selector
     ##
     selectorOverride: {}
@@ -1194,7 +1194,7 @@ kubeStateMetrics:
 ## Configuration for kube-state-metrics subchart
 ##
 kube-state-metrics:
-  namespaceOverride: ""
+  namespaceOverride: ''
   rbac:
     create: true
   podSecurityPolicy:
@@ -1212,11 +1212,11 @@ nodeExporter:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
 
     ## How long until a scrape request times out. If not set, the Prometheus default scape timeout is used.
     ##
-    scrapeTimeout: ""
+    scrapeTimeout: ''
 
     ## 	metric relabel configs to apply to samples before ingestion.
     ##
@@ -1240,7 +1240,7 @@ nodeExporter:
 ## Configuration for prometheus-node-exporter subchart
 ##
 prometheus-node-exporter:
-  namespaceOverride: ""
+  namespaceOverride: ''
   podLabels:
     ## Add the 'node-exporter' label to be used by serviceMonitor to match standard common usage in rules and grafana dashboards
     ##
@@ -1267,10 +1267,10 @@ prometheusOperator:
   ## rules from making their way into prometheus and potentially preventing the container from starting
   admissionWebhooks:
     failurePolicy: Fail
-    enabled: true
+    enabled: false
     ## A PEM encoded CA bundle which will be used to validate the webhook's server certificate.
     ## If unspecified, system trust roots on the apiserver are used.
-    caBundle: ""
+    caBundle: ''
     ## If enabled, generate a self-signed certificate, then patch the webhook configurations with the generated data.
     ## On chart upgrades (or if the secret exists) the cert will not be re-generated. You can use this to provide your own
     ## certs ahead of time if you wish.
@@ -1280,12 +1280,12 @@ prometheusOperator:
       image:
         repository: jettech/kube-webhook-certgen
         tag: v1.5.0
-        sha: ""
+        sha: ''
         pullPolicy: IfNotPresent
       resources: {}
       ## Provide a priority class name to the webhook patching job
       ##
-      priorityClassName: ""
+      priorityClassName: ''
       podAnnotations: {}
       nodeSelector: {}
       affinity: {}
@@ -1327,14 +1327,14 @@ prometheusOperator:
   ##
   serviceAccount:
     create: true
-    name: ""
+    name: ''
 
   ## Configuration for Prometheus operator service
   ##
   service:
     annotations: {}
     labels: {}
-    clusterIP: ""
+    clusterIP: ''
 
     ## Port to expose on each node
     ## Only used if service.type is 'NodePort'
@@ -1351,7 +1351,7 @@ prometheusOperator:
     ## Loadbalancer IP
     ## Only use if service.type is "loadbalancer"
     ##
-    loadBalancerIP: ""
+    loadBalancerIP: ''
     loadBalancerSourceRanges: []
 
     ## Service type
@@ -1394,9 +1394,9 @@ prometheusOperator:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     ## Scrape timeout. If not set, the Prometheus default scrape timeout is used.
-    scrapeTimeout: ""
+    scrapeTimeout: ''
     selfMonitor: true
 
     ## 	metric relabel configs to apply to samples before ingestion.
@@ -1481,7 +1481,7 @@ prometheusOperator:
   image:
     repository: quay.io/prometheus-operator/prometheus-operator
     tag: v0.45.0
-    sha: ""
+    sha: ''
     pullPolicy: IfNotPresent
 
   ## Prometheus image to use for prometheuses managed by the operator
@@ -1497,7 +1497,7 @@ prometheusOperator:
   prometheusConfigReloaderImage:
     repository: quay.io/prometheus-operator/prometheus-config-reloader
     tag: v0.45.0
-    sha: ""
+    sha: ''
 
   ## Set the prometheus config reloader side-car CPU limit
   ##
@@ -1509,7 +1509,7 @@ prometheusOperator:
 
   ## Set a Field Selector to filter watched secrets
   ##
-  secretFieldSelector: ""
+  secretFieldSelector: ''
 
 ## Deploy a Prometheus instance
 ##
@@ -1525,7 +1525,7 @@ prometheus:
   ##
   serviceAccount:
     create: true
-    name: ""
+    name: ''
 
   # Service for thanos service discovery on sidecar
   # Enable this can make Thanos Query can use
@@ -1538,14 +1538,14 @@ prometheus:
     labels: {}
     portName: grpc
     port: 10901
-    targetPort: "grpc"
+    targetPort: 'grpc'
 
   ## Configuration for Prometheus service
   ##
   service:
     annotations: {}
     labels: {}
-    clusterIP: ""
+    clusterIP: ''
 
     ## Port for Prometheus Service to listen on
     ##
@@ -1566,13 +1566,13 @@ prometheus:
 
     ## Loadbalancer IP
     ## Only use if service.type is "loadbalancer"
-    loadBalancerIP: ""
+    loadBalancerIP: ''
     loadBalancerSourceRanges: []
     ## Service type
     ##
     type: ClusterIP
 
-    sessionAffinity: ""
+    sessionAffinity: ''
 
   ## Configuration for creating a separate Service for each statefulset Prometheus replica
   ##
@@ -1607,7 +1607,7 @@ prometheus:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: ''
 
   # Ingress exposes thanos sidecar outside the cluster
   thanosIngress:
@@ -1702,9 +1702,9 @@ prometheus:
     ##
     ## Prefix for the per replica ingress that will have `-$replicaNumber`
     ## appended to the end
-    hostPrefix: ""
+    hostPrefix: ''
     ## Domain that will be used for the per replica ingress
-    hostDomain: ""
+    hostDomain: ''
 
     ## Paths to use for ingress rules
     ##
@@ -1717,7 +1717,7 @@ prometheus:
 
     ## Secret name containing the TLS certificate for Prometheus per replica ingress
     ## Secret must be manually created in the namespace
-    tlsSecretName: ""
+    tlsSecretName: ''
 
     ## Separated secret for each per replica Ingress. Can be used together with cert-manager
     ##
@@ -1726,7 +1726,7 @@ prometheus:
       ## Final form of the secret for each per replica ingress is
       ## {{ tlsSecretPerReplica.prefix }}-{{ $replicaNumber }}
       ##
-      prefix: "prometheus"
+      prefix: 'prometheus'
 
   ## Configure additional options for default pod security policy for Prometheus
   ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -1738,11 +1738,11 @@ prometheus:
   serviceMonitor:
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
-    interval: ""
+    interval: ''
     selfMonitor: true
 
     ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
-    scheme: ""
+    scheme: ''
 
     ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
     ## Of type: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
@@ -1783,15 +1783,15 @@ prometheus:
     ## Defaults to 30s.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/release-0.44/pkg/prometheus/promcfg.go#L180-L183
     ##
-    scrapeInterval: ""
+    scrapeInterval: ''
 
     ## Number of seconds to wait for target to respond before erroring
     ##
-    scrapeTimeout: ""
+    scrapeTimeout: ''
 
     ## Interval between consecutive evaluations.
     ##
-    evaluationInterval: ""
+    evaluationInterval: ''
 
     ## ListenLocal makes the Prometheus server listen on loopback, so that it does not bind against the Pod IP.
     ##
@@ -1808,7 +1808,7 @@ prometheus:
     image:
       repository: quay.io/prometheus/prometheus
       tag: v2.24.0
-      sha: ""
+      sha: ''
 
     ## Tolerations for use with node taints
     ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -1851,7 +1851,7 @@ prometheus:
 
     ## Name of the external label used to denote replica name
     ##
-    replicaExternalLabelName: ""
+    replicaExternalLabelName: ''
 
     ## If true, the Operator won't add the external label used to denote replica name
     ##
@@ -1859,7 +1859,7 @@ prometheus:
 
     ## Name of the external label used to denote Prometheus instance name
     ##
-    prometheusExternalLabelName: ""
+    prometheusExternalLabelName: ''
 
     ## If true, the Operator won't add the external label used to denote Prometheus instance name
     ##
@@ -1867,7 +1867,7 @@ prometheus:
 
     ## External URL at which Prometheus will be reachable.
     ##
-    externalUrl: ""
+    externalUrl: ''
 
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -1991,7 +1991,7 @@ prometheus:
 
     ## Maximum size of metrics
     ##
-    retentionSize: ""
+    retentionSize: ''
 
     ## Enable compression of the write-ahead log using Snappy.
     ##
@@ -2040,7 +2040,7 @@ prometheus:
     ## The default value "soft" means that the scheduler should *prefer* to not schedule two replica pods onto the same node but no guarantee is provided.
     ## The value "hard" means that the scheduler is *required* to not schedule two replica pods onto the same node.
     ## The value "" will disable pod anti-affinity so that no anti-affinity rules will be configured.
-    podAntiAffinity: ""
+    podAntiAffinity: ''
 
     ## If anti-affinity is enabled sets the topologyKey to use for anti-affinity.
     ## This can be changed to, for example, failure-domain.beta.kubernetes.io/zone
@@ -2200,7 +2200,7 @@ prometheus:
 
     ## 	Priority class assigned to the Pods
     ##
-    priorityClassName: ""
+    priorityClassName: ''
 
     ## Thanos configuration allows configuring various aspects of a Prometheus server in a Thanos environment.
     ## This section is experimental, it may change significantly without deprecation notice in any release.
@@ -2219,7 +2219,7 @@ prometheus:
 
     ## PortName to use for Prometheus.
     ##
-    portName: "web"
+    portName: 'web'
 
     ## ArbitraryFSAccessThroughSMs configures whether configuration based on a service monitor can access arbitrary files
     ## on the file system of the Prometheus container e.g. bearer token files.
